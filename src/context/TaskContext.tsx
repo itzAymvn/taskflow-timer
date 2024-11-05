@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { Task, TaskContextType } from "../types"
+import { v4 as uuidv4 } from 'uuid';
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined)
 
@@ -16,7 +17,7 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
 	const addTask = (taskData: Omit<Task, "id" | "createdAt">) => {
 		const newTask: Task = {
 			...taskData,
-			id: crypto.randomUUID(),
+			id: uuidv4(),
 			createdAt: Date.now(),
 		}
 		setTasks((prev) => [...prev, newTask])

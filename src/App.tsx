@@ -5,6 +5,7 @@ import { TaskList } from "./components/TaskList"
 import { Task } from "./types/task"
 import { ExportTasks } from "./components/ExportTasks"
 import { Collapse } from "./components/Collapse"
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
 	const [tasks, setTasks] = useState<Task[]>(() => {
@@ -23,7 +24,7 @@ function App() {
 	const addTask = (taskData: Omit<Task, "id" | "status">) => {
 		const newTask: Task = {
 			...taskData,
-			id: crypto.randomUUID(),
+			id: uuidv4(),
 			status: "pending",
 		}
 		setTasks((prev) => [...prev, newTask])
